@@ -1,0 +1,13 @@
+# База данных создаётся при запуске
+lab2.db
+*.db
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Прочее
+.DS_Store
+*.log
