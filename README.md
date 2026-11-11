@@ -48,7 +48,7 @@ web-security-lab/
 Клонирование репозитория:
 
 ```bash
-git clone https://github.com/<ваш-логин>/web-security-lab.git
+git clone https://github.com/Smith-kuz/web-security-lab.git
 cd web-security-lab
 ```
 
