@@ -1,0 +1,33 @@
+--- a/app.py	2026-11-11 21:40:49.749958675 +0300
++++ b/app.py	2026-11-11 21:41:05.501465681 +0300
+@@ -104,10 +104,10 @@
+         </form>""".format(msg=message))
+ 
+     def do_login(self, username, password):
+-        query = "SELECT username, role FROM users WHERE username = '%s' AND password = '%s'" % (username, password)
++        query = "SELECT username, role FROM users WHERE username = ? AND password = ?"
+         conn = db()
+         try:
+-            row = conn.execute(query).fetchone()
++            row = conn.execute(query, (username, password)).fetchone()
+         except sqlite3.Error:
+             row = None
+         conn.close()
+@@ -123,7 +123,7 @@
+         conn.close()
+         items = ""
+         for r in rows:
+-            items += "<div><b>%s</b>: %s</div>" % (r["author"], r["body"])
++            items += "<div><b>%s</b>: %s</div>" % (html.escape(r["author"]), html.escape(r["body"]))
+         self.send_html("""
+         <h1>Заметки</h1>{items}
+         <h2>Добавить</h2>
+@@ -144,7 +144,7 @@
+         self.send_html("""
+         <h1>Поиск</h1>
+         <form method="GET" action="/search"><input name="q"><button>Искать</button></form>
+-        <p>Вы искали: %s</p>""" % q)
++        <p>Вы искали: %s</p>""" % html.escape(q))
+ 
+ 
+ if __name__ == "__main__":

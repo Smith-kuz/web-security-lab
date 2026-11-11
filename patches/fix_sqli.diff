@@ -1,0 +1,15 @@
+--- a/app.py	2026-11-11 21:40:49.749958675 +0300
++++ b/app.py	2026-11-11 21:41:05.566985500 +0300
+@@ -104,10 +104,10 @@
+         </form>""".format(msg=message))
+ 
+     def do_login(self, username, password):
+-        query = "SELECT username, role FROM users WHERE username = '%s' AND password = '%s'" % (username, password)
++        query = "SELECT username, role FROM users WHERE username = ? AND password = ?"
+         conn = db()
+         try:
+-            row = conn.execute(query).fetchone()
++            row = conn.execute(query, (username, password)).fetchone()
+         except sqlite3.Error:
+             row = None
+         conn.close()
